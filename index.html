@@ -2,10 +2,215 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=quotation.html">
-  <title>KTM Energy Experts - Quotation Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KTM Solar Platform — Dashboard</title>
+  <meta name="description" content="Internal sales dashboard for KTM Energy Experts — proposals, leads, and project pipeline at a glance.">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <body>
-  <p>Opening Quotation Studio...</p>
+
+<!-- ── App Header ── -->
+<header class="app-header">
+  <a href="index.html" class="logo">
+    <img src="assets/images/logo.png" alt="KTM Energy Experts">
+    <div class="logo-text">KTM Solar Platform</div>
+  </a>
+  <nav class="app-nav" aria-label="Main navigation">
+    <a href="index.html" class="active" id="nav-dashboard">Dashboard</a>
+    <a href="customers.html" id="nav-customers">Customers</a>
+    <a href="builder.html" id="nav-builder">Proposal Builder</a>
+  </nav>
+  <div class="header-actions flex items-center gap-3" style="margin-left:auto;">
+    <button class="btn btn-secondary btn-sm" id="exportBtn" title="Export all data as JSON backup">
+      ↓ Backup
+    </button>
+    <a href="builder.html" class="btn btn-primary btn-sm" id="newProposalBtn">
+      + New Proposal
+    </a>
+  </div>
+</header>
+
+<!-- ── Main ── -->
+<main class="dashboard-main">
+  <div class="container">
+
+    <!-- Page title -->
+    <div class="dashboard-title-row">
+      <div>
+        <div class="section-eyebrow">Internal Dashboard</div>
+        <h1 class="dashboard-heading">Sales Overview</h1>
+        <p class="dashboard-sub" id="dashDate"></p>
+      </div>
+      <div class="pipeline-badge">
+        <span class="pipeline-dot animate-pulse-solar"></span>
+        Live
+      </div>
+    </div>
+
+    <!-- ── KPI Cards ── -->
+    <section class="kpi-grid stagger animate-fade-in-up" aria-label="Key performance indicators">
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">📋</div>
+        <div class="metric-label">Active Proposals</div>
+        <div class="metric-value solar" id="kpi-active">—</div>
+        <div class="metric-sub">Draft · Sent · Viewed · Negotiation</div>
+      </div>
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">📤</div>
+        <div class="metric-label">Proposals Sent</div>
+        <div class="metric-value" id="kpi-sent">—</div>
+        <div class="metric-sub">Total dispatched to customers</div>
+      </div>
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">👁️</div>
+        <div class="metric-label">Proposals Viewed</div>
+        <div class="metric-value" id="kpi-viewed">—</div>
+        <div class="metric-sub">Customer has opened the proposal</div>
+      </div>
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">✅</div>
+        <div class="metric-label">Proposals Accepted</div>
+        <div class="metric-value green" id="kpi-accepted">—</div>
+        <div class="metric-sub">Converted to projects</div>
+      </div>
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">👥</div>
+        <div class="metric-label">Total Customers</div>
+        <div class="metric-value" id="kpi-customers">—</div>
+        <div class="metric-sub">In the database</div>
+      </div>
+
+      <div class="metric-card animate-fade-in-up">
+        <div class="metric-icon">⚡</div>
+        <div class="metric-label">Total kWp Proposed</div>
+        <div class="metric-value gold" id="kpi-kwp">—</div>
+        <div class="metric-sub">kWp across active proposals</div>
+      </div>
+
+    </section>
+
+    <!-- ── Conversion Funnel ── -->
+    <section class="dashboard-section" aria-label="Proposal pipeline">
+      <div class="section-row">
+        <h2 class="section-heading-sm">Proposal Pipeline</h2>
+      </div>
+      <div class="funnel-row" id="funnelRow">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ── Recent Proposals + Quick Actions ── -->
+    <div class="dashboard-bottom-grid">
+
+      <!-- Recent proposals -->
+      <section class="dashboard-section proposals-section" aria-label="Recent proposals">
+        <div class="section-row">
+          <h2 class="section-heading-sm">Recent Proposals</h2>
+          <a href="builder.html" class="btn btn-ghost btn-sm">+ New</a>
+        </div>
+        <div class="proposals-table-wrap">
+          <table class="proposals-table" id="recentProposals">
+            <thead>
+              <tr>
+                <th>Ref</th>
+                <th>Customer</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="proposalsBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+          <div class="empty-state hidden" id="emptyProposals">
+            <div class="empty-icon">📄</div>
+            <div class="empty-title">No proposals yet</div>
+            <div class="empty-sub">Create your first proposal to get started.</div>
+            <a href="builder.html" class="btn btn-primary mt-4">+ Create Proposal</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <aside class="dashboard-sidebar" aria-label="Quick actions">
+        <h2 class="section-heading-sm">Quick Actions</h2>
+        <div class="quick-actions-list">
+          <a href="builder.html" class="quick-action-card" id="qa-new-proposal">
+            <div class="qa-icon">✏️</div>
+            <div>
+              <div class="qa-title">New Proposal</div>
+              <div class="qa-sub">Build a customer proposal</div>
+            </div>
+            <span class="qa-arrow">›</span>
+          </a>
+          <a href="customers.html" class="quick-action-card" id="qa-customers">
+            <div class="qa-icon">👥</div>
+            <div>
+              <div class="qa-title">Customer Database</div>
+              <div class="qa-sub">View and manage customers</div>
+            </div>
+            <span class="qa-arrow">›</span>
+          </a>
+          <a href="builder.html" class="quick-action-card" id="qa-builder">
+            <div class="qa-icon">🔧</div>
+            <div>
+              <div class="qa-title">Proposal Builder</div>
+              <div class="qa-sub">Open the A4 PDF builder</div>
+            </div>
+            <span class="qa-arrow">›</span>
+          </a>
+          <button class="quick-action-card" id="qa-export">
+            <div class="qa-icon">💾</div>
+            <div>
+              <div class="qa-title">Export Backup</div>
+              <div class="qa-sub">Download JSON backup file</div>
+            </div>
+            <span class="qa-arrow">›</span>
+          </button>
+          <label class="quick-action-card" id="qa-import" style="cursor:pointer;">
+            <div class="qa-icon">📥</div>
+            <div>
+              <div class="qa-title">Import Backup</div>
+              <div class="qa-sub">Restore from JSON file</div>
+            </div>
+            <span class="qa-arrow">›</span>
+            <input type="file" accept=".json" id="importFile" class="sr-only">
+          </label>
+        </div>
+
+        <!-- Status legend -->
+        <div class="status-legend">
+          <div class="legend-title">Proposal Statuses</div>
+          <div class="legend-grid">
+            <div class="legend-item"><span class="badge badge-draft">Draft</span></div>
+            <div class="legend-item"><span class="badge badge-sent">Sent</span></div>
+            <div class="legend-item"><span class="badge badge-viewed">Viewed</span></div>
+            <div class="legend-item"><span class="badge badge-negotiation">Negotiation</span></div>
+            <div class="legend-item"><span class="badge badge-accepted">Accepted</span></div>
+            <div class="legend-item"><span class="badge badge-rejected">Rejected</span></div>
+          </div>
+        </div>
+      </aside>
+
+    </div><!-- /dashboard-bottom-grid -->
+
+  </div><!-- /container -->
+</main>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- Scripts -->
+<script src="assets/js/data/store.js"></script>
+<script src="assets/js/engine/financial.js"></script>
+<script src="assets/js/dashboard.js"></script>
 </body>
 </html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customers — KTM Solar Platform</title>
+  <meta name="description" content="Customer database for KTM Energy Experts solar proposals.">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/customers.css">
+</head>
+<body>
+
+<!-- ── App Header ── -->
+<header class="app-header">
+  <a href="index.html" class="logo">
+    <img src="assets/images/logo.png" alt="KTM Energy Experts">
+    <div class="logo-text">KTM Solar Platform</div>
+  </a>
+  <nav class="app-nav" aria-label="Main navigation">
+    <a href="index.html" id="nav-dashboard">Dashboard</a>
+    <a href="customers.html" class="active" id="nav-customers">Customers</a>
+    <a href="builder.html" id="nav-builder">Proposal Builder</a>
+  </nav>
+  <div class="flex items-center gap-3" style="margin-left:auto;">
+    <button class="btn btn-primary btn-sm" id="newCustomerBtn">+ New Customer</button>
+  </div>
+</header>
+
+<main class="customers-main">
+  <div class="container">
+
+    <div class="customers-title-row">
+      <div>
+        <div class="section-eyebrow">Customer Database</div>
+        <h1 class="dashboard-heading">Customers</h1>
+      </div>
+      <div class="customers-search-row">
+        <input type="search" class="form-control search-input" id="customerSearch" placeholder="Search by name, company or phone…">
+        <select class="form-control filter-select" id="customerTypeFilter">
+          <option value="">All Types</option>
+          <option value="residential">Residential</option>
+          <option value="commercial">Commercial</option>
+          <option value="industrial">Industrial</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Customer list -->
+    <div class="customers-grid" id="customersGrid">
+      <!-- Populated by JS -->
+    </div>
+    <div class="empty-state hidden" id="emptyCustomers">
+      <div class="empty-icon">👥</div>
+      <div class="empty-title">No customers yet</div>
+      <div class="empty-sub">Add your first customer to start building proposals.</div>
+      <button class="btn btn-primary mt-4" id="emptyNewBtn">+ Add Customer</button>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Customer Modal ── -->
+<div class="modal-overlay hidden" id="customerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">New Customer</h2>
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body" id="customerForm" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="custName">Name <span class="required">*</span></label>
+          <input type="text" class="form-control" id="custName" required placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custCompany">Company / Organisation</label>
+          <input type="text" class="form-control" id="custCompany" placeholder="Company name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custPhone">Phone <span class="required">*</span></label>
+          <input type="tel" class="form-control" id="custPhone" required placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custEmail">Email</label>
+          <input type="email" class="form-control" id="custEmail" placeholder="email@example.com">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label" for="custAddress">Address</label>
+          <input type="text" class="form-control" id="custAddress" placeholder="Site / billing address">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custCity">City</label>
+          <input type="text" class="form-control" id="custCity" placeholder="Pune">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custType">Customer Type</label>
+          <select class="form-control" id="custType">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="industrial">Industrial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="custGST">GST Number</label>
+          <input type="text" class="form-control" id="custGST" placeholder="27XXXXX1234Z5">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label" for="custNotes">Notes</label>
+          <textarea class="form-control" id="custNotes" rows="3" placeholder="Any internal notes…"></textarea>
+        </div>
+      </div>
+      <input type="hidden" id="custId">
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost" id="modalCancelBtn">Cancel</button>
+      <button type="button" class="btn btn-primary" id="modalSaveBtn">Save Customer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Customer Detail Panel ── -->
+<div class="detail-panel-overlay hidden" id="detailOverlay">
+  <div class="detail-panel">
+    <div class="detail-header">
+      <div>
+        <div class="detail-name" id="detailName">—</div>
+        <div class="detail-company" id="detailCompany">—</div>
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn-secondary btn-sm" id="detailEditBtn">✏️ Edit</button>
+        <button class="btn btn-primary btn-sm" id="detailNewProposalBtn">+ New Proposal</button>
+        <button class="detail-close" id="detailClose" aria-label="Close panel">✕</button>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-contact-row">
+        <span id="detailPhone">—</span>
+        <span id="detailEmail">—</span>
+        <span id="detailCity">—</span>
+        <span class="badge" id="detailType">—</span>
+      </div>
+      <div class="detail-section-title">Proposals</div>
+      <div id="detailProposals">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<script src="assets/js/data/store.js"></script>
+<script src="assets/js/customers.js"></script>
+</body>
+</html>

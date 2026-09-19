@@ -1,0 +1,118 @@
+/* ==========================================================================
+   KTM Solar Platform — Proposal Builder Stylesheet
+   --------------------------------------------------------------------------
+   Builds upon design-system.css and preserves all 11-page A4 canvas rendering.
+   ========================================================================== */
+@import url('app.css');
+
+/* Layout adjustments with global header */
+body.builder-body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--clr-bg, #080d1a);
+  color: var(--clr-text-primary, #f0f4ff);
+  font-family: var(--font-ui, 'Inter', sans-serif);
+}
+
+.builder-app {
+  display: flex;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+/* Header action badge */
+.builder-prop-id {
+  font-family: monospace;
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  background: var(--clr-surface-2, #162246);
+  border: 1px solid var(--clr-border, rgba(255,255,255,0.1));
+  border-radius: var(--radius-sm);
+  color: var(--clr-solar);
+  font-weight: 600;
+}
+
+/* Engineering live specs pill grid */
+.eng-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  padding: 10px;
+  background: rgba(17, 29, 56, 0.7);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  border-radius: 8px;
+}
+
+.eng-pill {
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 13, 26, 0.6);
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.eng-pill-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8fa3c8;
+  margin-bottom: 2px;
+}
+
+.eng-pill-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.eng-pill-val.gold {
+  color: #fbbf24;
+}
+
+.eng-pill-val.green {
+  color: #22c55e;
+}
+
+/* Fieldset styling enhancement */
+.form-panel fieldset {
+  background: rgba(17, 29, 56, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.form-panel fieldset legend {
+  color: #f97316;
+  font-weight: 600;
+  padding: 0 6px;
+}
+
+.form-panel select,
+.form-panel input[type="text"],
+.form-panel input[type="number"],
+.form-panel input[type="date"],
+.form-panel input[type="email"],
+.form-panel input[type="tel"] {
+  background: #0d1529;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f0f4ff;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.form-panel select:focus,
+.form-panel input:focus {
+  border-color: #f97316;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+}
+
+/* Save feedback message */
+.save-status-indicator {
+  font-size: 11px;
+  color: #8fa3c8;
+  margin-top: 4px;
+}
