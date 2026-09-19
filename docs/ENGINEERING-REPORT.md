@@ -286,3 +286,13 @@ All pictured values are synthetic test fixtures, not real customer project data.
 - [Mobile dashboard](evidence/mobile-dashboard.png)
 - [Rendered first PDF page](evidence/pdf-first-page.png)
 - [Complete local test-run output](evidence/test-run.txt)
+
+### Merge follow-up
+
+The first remote full-browser CI run passed installation, formatting and Node tests,
+but failed browser verification. Remote artifact/log downloads were inaccessible
+from this sandbox. Inspection identified that the combined 15-test browser run
+reused one account/database while login throttling permits 10 attempts per email
+per window. CI now runs each browser in its own job/database (five sign-ins each),
+without changing production throttling or weakening assertions. GitHub annotations
+were enabled so any remaining browser failures are inspectable directly.
