@@ -1,0 +1,276 @@
+
+> ktm-quotation-studio@2.0.0 test:all
+> npm test && npm run test:browser
+
+
+> ktm-quotation-studio@2.0.0 test
+> node --test tests/*.test.cjs
+
+TAP version 13
+# (node:6135) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: auth, CSRF, origin, roles, strict serving and security headers
+ok 1 - auth, CSRF, origin, roles, strict serving and security headers
+  ---
+  duration_ms: 310.960432
+  type: 'test'
+  ...
+# Subtest: full create-save-reopen-revise-export-share-clean-client-accept lifecycle
+ok 2 - full create-save-reopen-revise-export-share-clean-client-accept lifecycle
+  ---
+  duration_ms: 55.288011
+  type: 'test'
+  ...
+# Subtest: concurrent revisions conflict and old links revoked
+ok 3 - concurrent revisions conflict and old links revoked
+  ---
+  duration_ms: 26.650053
+  type: 'test'
+  ...
+# Subtest: invalid/nonexistent and expired links never return another proposal
+ok 4 - invalid/nonexistent and expired links never return another proposal
+  ---
+  duration_ms: 17.670873
+  type: 'test'
+  ...
+# Subtest: staff view does not increment analytics; explicit revoke works
+ok 5 - staff view does not increment analytics; explicit revoke works
+  ---
+  duration_ms: 16.523985
+  type: 'test'
+  ...
+# Subtest: empty/incomplete drafts save but cannot release; invalid inputs rejected
+ok 6 - empty/incomplete drafts save but cannot release; invalid inputs rejected
+  ---
+  duration_ms: 15.108174
+  type: 'test'
+  ...
+# Subtest: customer revision updates preserve old proposal snapshot
+ok 7 - customer revision updates preserve old proposal snapshot
+  ---
+  duration_ms: 17.280318
+  type: 'test'
+  ...
+# Subtest: portable import is validated, additive and atomic
+ok 8 - portable import is validated, additive and atomic
+  ---
+  duration_ms: 17.021281
+  type: 'test'
+  ...
+# Subtest: legacy import rejected, dangerous keys rejected, hostile strings stored as inert data
+ok 9 - legacy import rejected, dangerous keys rejected, hostile strings stored as inert data
+  ---
+  duration_ms: 8.739036
+  type: 'test'
+  ...
+# Subtest: SQLite records persist across an independent connection
+ok 10 - SQLite records persist across an independent connection
+  ---
+  duration_ms: 2.458788
+  type: 'test'
+  ...
+# Subtest: creation/import retries are idempotent, differing replay payloads conflict
+ok 11 - creation/import retries are idempotent, differing replay payloads conflict
+  ---
+  duration_ms: 13.858093
+  type: 'test'
+  ...
+# Subtest: non-admin export/import denied; disabled users lose live sessions
+ok 12 - non-admin export/import denied; disabled users lose live sessions
+  ---
+  duration_ms: 519.182939
+  type: 'test'
+  ...
+# Subtest: invalid dates and capacity mismatch cannot be released
+ok 13 - invalid dates and capacity mismatch cannot be released
+  ---
+  duration_ms: 18.509622
+  type: 'test'
+  ...
+# Subtest: portable round-trip preserves original customer snapshots, no acceptance imported
+ok 14 - portable round-trip preserves original customer snapshots, no acceptance imported
+  ---
+  duration_ms: 27.154523
+  type: 'test'
+  ...
+# Subtest: immutable estimates carry engine version and are read from revision snapshots
+ok 15 - immutable estimates carry engine version and are read from revision snapshots
+  ---
+  duration_ms: 7.418648
+  type: 'test'
+  ...
+# Subtest: oversized JSON, malformed body and wrong content type fail closed
+ok 16 - oversized JSON, malformed body and wrong content type fail closed
+  ---
+  duration_ms: 34.016592
+  type: 'test'
+  ...
+# Subtest: production refuses missing HTTPS origin and uses secure session headers
+ok 17 - production refuses missing HTTPS origin and uses secure session headers
+  ---
+  duration_ms: 528.922203
+  type: 'test'
+  ...
+# Subtest: staff cannot record customer intent through their authenticated session
+ok 18 - staff cannot record customer intent through their authenticated session
+  ---
+  duration_ms: 17.13193
+  type: 'test'
+  ...
+# Subtest: future calculation changes do not mutate released financial snapshots
+ok 19 - future calculation changes do not mutate released financial snapshots
+  ---
+  duration_ms: 9.99526
+  type: 'test'
+  ...
+# Subtest: credential guessing is rate limited
+ok 20 - credential guessing is rate limited
+  ---
+  duration_ms: 2621.626202
+  type: 'test'
+  ...
+# Subtest: revision update retry returns original committed response without another revision
+ok 21 - revision update retry returns original committed response without another revision
+  ---
+  duration_ms: 12.152247
+  type: 'test'
+  ...
+# Subtest: explicit zero tax, escalation, export and payment values survive
+ok 22 - explicit zero tax, escalation, export and payment values survive
+  ---
+  duration_ms: 3.797042
+  type: 'test'
+  ...
+# Subtest: missing inputs never silently default or coerce
+ok 23 - missing inputs never silently default or coerce
+  ---
+  duration_ms: 1.850759
+  type: 'test'
+  ...
+# Subtest: negative, non-finite, extreme and fractional-year data rejected
+ok 24 - negative, non-finite, extreme and fractional-year data rejected
+  ---
+  duration_ms: 0.283717
+  type: 'test'
+  ...
+# Subtest: subsidy is explicit, eligibility-controlled and cannot exceed cost
+ok 25 - subsidy is explicit, eligibility-controlled and cannot exceed cost
+  ---
+  duration_ms: 0.677232
+  type: 'test'
+  ...
+# Subtest: payment schedule must add to 100 including zero
+ok 26 - payment schedule must add to 100 including zero
+  ---
+  duration_ms: 0.658748
+  type: 'test'
+  ...
+# Subtest: zero savings is not zero-year payback; zero investment IRR unavailable
+ok 27 - zero savings is not zero-year payback; zero investment IRR unavailable
+  ---
+  duration_ms: 0.206999
+  type: 'test'
+  ...
+# Subtest: IRR numeric regression and energy units
+ok 28 - IRR numeric regression and energy units
+  ---
+  duration_ms: 0.250308
+  type: 'test'
+  ...
+# Subtest: net savings include O&M and blended export revenues
+ok 29 - net savings include O&M and blended export revenues
+  ---
+  duration_ms: 0.622726
+  type: 'test'
+  ...
+# Subtest: equal-string sizing consumes exactly available modules
+ok 30 - equal-string sizing consumes exactly available modules
+  ---
+  duration_ms: 0.664658
+  type: 'test'
+  ...
+# Subtest: three modules cannot become twenty; missing parameters never fabricated
+ok 31 - three modules cannot become twenty; missing parameters never fabricated
+  ---
+  duration_ms: 0.55778
+  type: 'test'
+  ...
+# Subtest: temperature, current, DC power and bad physical relationships block layout
+ok 32 - temperature, current, DC power and bad physical relationships block layout
+  ---
+  duration_ms: 0.399356
+  type: 'test'
+  ...
+# Subtest: deterministic sweep of possible designs respects all reported constraints
+ok 33 - deterministic sweep of possible designs respects all reported constraints
+  ---
+  duration_ms: 2.187238
+  type: 'test'
+  ...
+# Subtest: strict schema rejects unknown fields and preserves zero
+ok 34 - strict schema rejects unknown fields and preserves zero
+  ---
+  duration_ms: 1.106036
+  type: 'test'
+  ...
+# Subtest: IRR unavailable for multiple sign changes rather than selecting an arbitrary root
+ok 35 - IRR unavailable for multiple sign changes rather than selecting an arbitrary root
+  ---
+  duration_ms: 0.101371
+  type: 'test'
+  ...
+# Subtest: invalid calendar dates reject as validation errors, not internal failures
+ok 36 - invalid calendar dates reject as validation errors, not internal failures
+  ---
+  duration_ms: 0.463898
+  type: 'test'
+  ...
+# (node:6155) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:6162) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:6173) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: encrypted full backup restores records, audit, hashes and invalidates sessions; tampering rejected
+ok 37 - encrypted full backup restores records, audit, hashes and invalidates sessions; tampering rejected
+  ---
+  duration_ms: 384.557807
+  type: 'test'
+  ...
+# Subtest: password hashes are salted, versioned and whitespace-preserving
+ok 38 - password hashes are salted, versioned and whitespace-preserving
+  ---
+  duration_ms: 1249.005735
+  type: 'test'
+  ...
+# Subtest: database rejects schema downgrades and immutable-history updates
+ok 39 - database rejects schema downgrades and immutable-history updates
+  ---
+  duration_ms: 14.864015
+  type: 'test'
+  ...
+1..39
+# tests 39
+# suites 0
+# pass 39
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6432.410445
+
+> ktm-quotation-studio@2.0.0 test:browser
+> playwright test
+
+[WebServer] (node:6216) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+  ✓  1 [chromium] › tests/browser/workflows.spec.cjs:60:1 › real staff → revision → print/PDF → clean-browser share → acceptance → stored history (6.2s)
+  ✓  2 [chromium] › tests/browser/workflows.spec.cjs:195:1 › mobile form, desktop dashboard and customer directory accessibility (2.2s)
+  ✓  3 [chromium] › tests/browser/workflows.spec.cjs:231:1 › XSS payload is inert text, invalid link never falls back (1.0s)
+  ✓  4 [chromium] › tests/browser/workflows.spec.cjs:251:1 › portable export/import via UI and missing proposal handling (716ms)
+  ✓  5 [chromium] › tests/browser/workflows.spec.cjs:273:1 › lost save acknowledgement retries without duplicate revisions or lost form input (1.9s)
+
+  5 passed (13.3s)

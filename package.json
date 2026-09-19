@@ -1,0 +1,41 @@
+{
+  "name": "ktm-quotation-studio",
+  "version": "2.0.0",
+  "description": "Server-backed, revisioned solar quotation workspace",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node server/index.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:browser": "playwright test",
+    "test:all": "npm test && npm run test:browser",
+    "staff": "node scripts/staff.cjs",
+    "format": "prettier --write public server scripts tests playwright.config.cjs",
+    "format:check": "prettier --check public server scripts tests playwright.config.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rushi-builds/Quotation-Studio-Backup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rushi-builds/Quotation-Studio-Backup/issues"
+  },
+  "homepage": "https://github.com/rushi-builds/Quotation-Studio-Backup#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@napi-rs/canvas": "1.0.9",
+    "@playwright/test": "1.63.0",
+    "@sparticuz/chromium": "153.0.0",
+    "pdfjs-dist": "6.3.289",
+    "prettier": "3.9.8"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  }
+}
